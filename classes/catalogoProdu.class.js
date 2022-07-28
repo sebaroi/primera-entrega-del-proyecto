@@ -10,8 +10,8 @@ class CatalogoProdu {
     }
 
     listarProdu(){
-        this.productos.forEach((producto,index) => {
-            console.log("Item",index + 1, producto);
+        this.productos.forEach((producto) => {
+            console.log(producto);
     })
 }
 
@@ -57,7 +57,7 @@ else{
 
 
 
-modificarProdu(produABuscar, id, categoria, nombreProdu, precio, descripcion, stock)
+modificarProdu(produABuscar, id, categoria, nombreProdu, precio, descripcion, stock, imagen)
 {
     let busca = this.productos.find((producto) =>
         producto.sku.includes(produABuscar))
@@ -70,6 +70,7 @@ modificarProdu(produABuscar, id, categoria, nombreProdu, precio, descripcion, st
         busca.precio=precio;
         busca.descripcion=descripcion;
         busca.stock=stock;
+        busca.imagen=imagen;
     }
     else{
         alert("El producto no existe")

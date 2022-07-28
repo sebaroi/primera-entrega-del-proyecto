@@ -1,4 +1,10 @@
-const catalogoProdu = new CatalogoProdu([])
+const productos = [
+    {sku: 1, categoria: "placas de video", nombreProdu: "Nvidia Asus Dual GeForce GTX 1650 OC Edition 4GB", precio: 80200, descripcion: "placa de video", stock: 4, imagen:"https://http2.mlstatic.com/D_NQ_NP_2X_770553-MLA44835817388_022021-F.webp" },
+    {sku: 2, categoria: "Mothers", nombreProdu: "Asrock A68", precio: 5800, descripcion: "Mother para pc", stock: 7, imagen:"https://http2.mlstatic.com/D_NQ_NP_759323-MLA42590871149_072020-O.webp" },
+    {sku: 3, categoria: "Mothers", nombreProdu: "Asus k56nb", precio: 1520, descripcion: "Mother para pc", stock: 4, imagen:"https://http2.mlstatic.com/D_NQ_NP_914646-MLA49335236971_032022-O.webp" },
+]
+
+const catalogoProdu = new CatalogoProdu(productos)
 
 
 function inicio() {
@@ -49,36 +55,70 @@ function vender (){
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-    esta (producto,venta)
-    if (estas == true){
-        pos (tipi,sel)
-        total = total + tipi[posicion].precio    
-    } else{
-        alert(`El producto no existe`)
-    }
-
-    cobrar(total)
+function cargarDatosProductos()
+{
+    id = prompt("Ingrese el ID: ");
+    cate = prompt("Ingrese la categoria: ");
+    nombre = prompt("Ingrese el producto: ");
+    valor =  prompt("Ingrese Precio: ");
+    descri = prompt("Ingrese la Descripción: ");
+    cantidad = prompt("Ingrese la cantidad en stock: ");
+    imag = prompt("Ingrese la imagen: ");
+    let nuevo = new Producto (id, cate, nombre, valor, descri, cantidad, imag)
+    catalogoProdu.agregarProd(nuevo)//tiene que ser en el array y no en el constructor
 }
 
-*/
+
+function modificar () {
+    idmodificar = prompt ("Ingrese el id del prodcuto: ")
+    cate = prompt("Ingrese la categoria: ");
+    nombre = prompt("Ingrese el producto: ");
+    valor =  prompt("Ingrese Precio: ");
+    descri = prompt("Ingrese la Descripción: ");
+    cantidad = prompt("Ingrese la cantidad en stock: ");
+    imag = prompt("Ingrese la imagen: ");
+    catalogoProdu.modificarProdu(idmodificar, cate, nombre, valor, descri, cantidad, imag)
+    }
+
+
+
+function listarProducto() {
+    const nodoPrincipal = document.getElementById("contenedor")
+    nodoPrincipal.innerHTML="";
+    //nodoPrincipal.setAttribute("style","display:flex")
+    catalogoProdu.productos.forEach((producto)=>{
+        const divProducto = document.createElement("div")
+        divProducto.innerHTML=`
+                    <div class="marcoProducto">
+                        <div class="imagenProducto">
+                            <img src=${producto.imagen}>
+                        </div>
+                    <div class="textoProducto">
+                        <p>${producto.nombreProdu}</p>
+                        <p>$${producto.precio}</p>
+                        <hr>
+                        <div class="botonComprar" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button class="button">COMPRAR</button>
+                        </div>
+                    </div>`
+
+                    nodoPrincipal.appendChild(divProducto);
+    })
+
+}
+
+
+function buscar () {
+    let busca = prompt ("Ingrese el Id del prodcuto a buscar: ")
+    catalogoProdu.buscarProdu(busca)
+    }
+
+
+let total = 0
+let posicion = 0 
+
+
+
 
 
 /*
@@ -99,51 +139,6 @@ function cobrar (monto) {
     }
 }
 */
-
-function cargarDatosProductos()
-{
-    id = prompt("Ingrese el ID: ");
-    cate = prompt("Ingrese la categoria: ");
-    nombre = prompt("Ingrese el producto: ");
-    valor =  prompt("Ingrese Precio: ");
-    descri = prompt("Ingrese la Descripción: ");
-    cantidad = prompt("Ingrese la cantidad en stock: ");
-    let nuevo = new Producto (id, cate, nombre, valor, descri, cantidad)
-    catalogoProdu.agregarProd(nuevo)//tiene que ser en el array y no en el constructor
-}
-
-
-
-function modificar () {
-    idmodificar = prompt ("Ingrese el id del prodcuto: ")
-    cate = prompt("Ingrese la categoria: ");
-    nombre = prompt("Ingrese el producto: ");
-    valor =  prompt("Ingrese Precio: ");
-    descri = prompt("Ingrese la Descripción: ");
-    cantidad = prompt("Ingrese la cantidad en stock: ");
-    catalogoProdu.modificarProdu(idmodificar, cate, nombre, valor, descri, cantidad)
-
-    }
-
-
-
-function listarProducto() {
-    catalogoProdu.listarProdu(catalogoProdu)
-}
-
-
-function buscar () {
-    let busca = prompt ("Ingrese el Id del prodcuto a buscar: ")
-    catalogoProdu.buscarProdu(busca)
-    }
-
-
-let total = 0
-let posicion = 0 
-let estas
-let sel = 0 
-
-
 
 
 
